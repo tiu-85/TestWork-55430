@@ -14,5 +14,12 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('app');
 });
+
+Route::group(['middleware' => ['web']], function () {
+    Route::get('/images/{filename}', function ($filename) {
+        return Storage::get('images/' . $filename);
+    });
+});
+
